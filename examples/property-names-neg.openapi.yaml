@@ -1,0 +1,29 @@
+openapi: 3.0.3
+info:
+  title: Rules example API
+  description: API document to allow for execution of rule linting
+  version: 1.0.0
+  contact:
+    name: Frank Kilcommins
+    email: frank.kilcommins@smartbear.com
+  license:
+    name: Apache
+    url: http://localhost/licenses
+
+paths: {}           
+components:
+  schemas:
+    Policy:
+      type: object
+      properties:
+        PolicyNumber:
+          description: The insurance policy number
+          type: string
+          example: IXP12345678
+        ISO100:
+          description: Policy complies with random ISO
+          type: boolean
+          example: true
+        EA:f-oo:
+          description: A poor curie property name
+          type: string

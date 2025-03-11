@@ -1,0 +1,35 @@
+extends: spectral:oas
+
+functions: [hal-casing, curie-casing]
+functionsDir: ./custom-functions
+
+rules:
+  operation-operationId: true
+  operation-tags: off
+  operation-tag-defined: off
+  oas3-unused-component: off
+  oas3-api-servers: off
+
+  # Note: The Spectral VSCode extension will not display "hint" messages, so use "info" rather than "hint".
+
+  camelCase-property-names:
+    description: Property names must be camelCase and alphanumeric
+    severity: error
+    recommended: true
+    message: '{{property}} MUST follow camelCase'
+    given: $..properties.*~
+    then:
+      function: hal-casing
+      functionOptions:
+        type: camel
+
+  curie-property-names:
+    description: CURIE properties must follow camelCase
+    severity: error
+    recommended: true
+    message: '{{property}} MUST follow camelCase on both sides of the ":"'
+    given: $..properties.*~
+    then:
+      function: curie-casing
+      functionOptions:
+        type: camel 
