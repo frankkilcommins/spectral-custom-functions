@@ -6,10 +6,32 @@ Here's a collection of custom Spectral functions I find myself using from time t
 
 | Function   | Description     | Details|
 | ---------- | -------------- | -----|
-| `hal-casing` | Apply casing checks in combination with Hypertext Application Language keywords | [view](#hal-casing) |
+| `hal-casing` | Apply casing rules in combination with _Hypertext Application Language (HAL)_ keywords | [view](#hal-casing) |
 | `curie-casing` | Apply _casing_ rules in combination with _Compact URI_ syntax | [view](#curie-casing) |
 
-## hal-casing
+## How to use
+
+To leverage these rules along with you `*.spectral.yaml|json` ruleset, do the following:
+
+- create a folder relative to your ruleset file called `custom-functions`
+- within your ruleset file specify the `functionDir` and  `functions` as follows:
+
+```yaml
+functions: [hal-casing, curie-casing]
+functionsDir: ./custom-functions
+```
+
+A full example ruleset taking advantage of these rules can be found in the [.spectral.yaml](.spectral.yaml) file in this repo.
+
+## Usage
+
+Feel free to use or extend this work (referencing to this repo is preferred). PRs back with more useful functions are much appreciated 💚.
+
+🌟 the repo if it's been useful for your work.
+
+## Custom Rules
+
+### hal-casing
 
 If your APIs are conforming to the [HAL specification](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-11#name-reserved-properties) and leveraging `application/hal+json`, then you might find it cumbersome to use the core **casing** function. This `hal-casing` function gives you the ability to apply your casing of choice (e.g., `camelCase` or `snake-case`), while safely allowing reserved properties for HAL as defined in the [HAL specification](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-11#name-reserved-properties).
 
@@ -25,7 +47,7 @@ Supported cases:
 | snake  | very_long_name |
 | macro  | VERY_LONG_NAME |
 
-### Example rule leveraging the function
+#### Example rule leveraging the function
 
 ```yaml
 camelCase-property-names:
@@ -40,7 +62,7 @@ then:
     type: camel
 ```
 
-### Sample schemas that pass the rule
+#### Sample schemas that pass the rule
 
 > notice use of `_embedded` and `_links` reserved HAL keywords
 
@@ -77,7 +99,7 @@ PagedPolicies:
                 type: string
 ```
 
-## curie-casing
+### curie-casing
 
 If your APIs specify or leverage compact URIs conforming to the [CURIE Syntax](https://www.w3.org/TR/2010/NOTE-curie-20101216/), then you might find it cumbersome to use the core **casing** function. This `curie-casing` function gives you the ability to apply your casing of choice (e.g., `camelCase` or `snake-case`),
 
@@ -95,7 +117,7 @@ Supported cases:
 | snake  | very_long_name |
 | macro  | VERY_LONG_NAME |
 
-### Example rule leveraging the **curie-casing** function
+#### Example rule leveraging the **curie-casing** function
 
 ```yaml
   curie-property-names:
@@ -110,7 +132,7 @@ Supported cases:
         type: camel 
 ```
 
-### Sample schemas that pass the **curie-casing** rule
+#### Sample schemas that pass the **curie-casing** rule
 
 ```yaml
   schemas:
@@ -157,4 +179,3 @@ Supported cases:
                     href:
                       type: string
 ```
-
